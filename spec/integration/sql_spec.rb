@@ -18,7 +18,7 @@ DataMapper::Spec::AdapterHelpers.available_adapters.each do |adapter|
 
       before do
         @creator = DataMapper::Migration::TableCreator.new(repository(adapter).adapter, :people) do
-          column :id,          DataMapper::Types::Serial
+          column :id,          DataMapper::Property::Serial
           column :name,        'VARCHAR(50)', :allow_nil => false
           column :long_string, String, :size => 200
         end

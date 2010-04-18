@@ -190,7 +190,7 @@ module DataMapper
           type      = property.type
           type_map  = self.class.type_map
 
-          schema = (type_map[type] || type_map[primitive]).merge(:name => property.field)
+          schema = (type_map[property.class] || type_map[primitive] || type_map[type]).merge(:name => property.field)
 
           schema_primitive = schema[:primitive]
 
@@ -260,21 +260,22 @@ module DataMapper
         #
         # @api private
         def type_map
-          length    = Property::DEFAULT_LENGTH
-          precision = Property::DEFAULT_PRECISION
-          scale     = Property::DEFAULT_SCALE_BIGDECIMAL
+          length    = Property::String::DEFAULT_LENGTH
+          precision = Property::Numeric::DEFAULT_PRECISION
+          scale     = Property::BigDecimal::DEFAULT_SCALE
 
           @type_map ||= {
-            Integer     => { :primitive => 'INTEGER'                                           },
-            String      => { :primitive => 'VARCHAR', :length => length                        },
-            Class       => { :primitive => 'VARCHAR', :length => length                        },
-            BigDecimal  => { :primitive => 'DECIMAL', :precision => precision, :scale => scale },
-            Float       => { :primitive => 'FLOAT',   :precision => precision                  },
-            DateTime    => { :primitive => 'TIMESTAMP'                                         },
-            Date        => { :primitive => 'DATE'                                              },
-            Time        => { :primitive => 'TIMESTAMP'                                         },
-            TrueClass   => { :primitive => 'BOOLEAN'                                           },
-            Types::Text => { :primitive => 'TEXT'                                              },
+            Object         => { :primitive => 'BLOB'                                              },
+            Integer        => { :primitive => 'INTEGER'                                           },
+            String         => { :primitive => 'VARCHAR', :length => length                        },
+            Class          => { :primitive => 'VARCHAR', :length => length                        },
+            BigDecimal     => { :primitive => 'DECIMAL', :precision => precision, :scale => scale },
+            Float          => { :primitive => 'FLOAT',   :precision => precision                  },
+            DateTime       => { :primitive => 'TIMESTAMP'                                         },
+            Date           => { :primitive => 'DATE'                                              },
+            Time           => { :primitive => 'TIMESTAMP'                                         },
+            TrueClass      => { :primitive => 'BOOLEAN'                                           },
+            Property::Text => { :primitive => 'TEXT'                                              },
           }.freeze
         end
       end
