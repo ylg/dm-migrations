@@ -141,9 +141,10 @@ module DataMapper
         # @api private
         def type_map
           precision = Property::Numeric::DEFAULT_PRECISION
-          scale     = Property::BigDecimal::DEFAULT_SCALE
+          scale     = Property::Decimal::DEFAULT_SCALE
 
           @type_map ||= super.merge(
+            Object     => { :primitive => 'TEXT' },
             BigDecimal => { :primitive => 'NUMERIC',          :precision => precision, :scale => scale },
             Float      => { :primitive => 'DOUBLE PRECISION'                                           }
           ).freeze

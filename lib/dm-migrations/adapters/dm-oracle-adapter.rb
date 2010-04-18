@@ -266,7 +266,7 @@ module DataMapper
         def type_map
           length    = Property::String::DEFAULT_LENGTH
           precision = Property::Numeric::DEFAULT_PRECISION
-          scale     = Property::BigDecimal::DEFAULT_SCALE
+          scale     = Property::Decimal::DEFAULT_SCALE
 
           @type_map ||= {
             Integer        => { :primitive => 'NUMBER',   :precision => precision, :scale => 0   },
