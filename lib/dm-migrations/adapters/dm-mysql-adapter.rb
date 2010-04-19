@@ -53,7 +53,7 @@ module DataMapper
         def property_schema_hash(property)
           schema = super
 
-          if schema[:primitive] == 'TEXT'
+          if property.kind_of?(Property::Text)
             schema[:primitive] = text_column_statement(property.length)
             schema.delete(:default)
           end

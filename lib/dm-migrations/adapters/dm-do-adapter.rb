@@ -265,17 +265,18 @@ module DataMapper
           scale     = Property::Decimal::DEFAULT_SCALE
 
           @type_map ||= {
-            Object         => { :primitive => 'BLOB'                                              },
-            Integer        => { :primitive => 'INTEGER'                                           },
-            String         => { :primitive => 'VARCHAR', :length => length                        },
-            Class          => { :primitive => 'VARCHAR', :length => length                        },
-            BigDecimal     => { :primitive => 'DECIMAL', :precision => precision, :scale => scale },
-            Float          => { :primitive => 'FLOAT',   :precision => precision                  },
-            DateTime       => { :primitive => 'TIMESTAMP'                                         },
-            Date           => { :primitive => 'DATE'                                              },
-            Time           => { :primitive => 'TIMESTAMP'                                         },
-            TrueClass      => { :primitive => 'BOOLEAN'                                           },
-            Property::Text => { :primitive => 'TEXT'                                              },
+            Property::Binary => { :primitive => 'BLOB'                                              },
+            Object           => { :primitive => 'TEXT'                                              },
+            Integer          => { :primitive => 'INTEGER'                                           },
+            String           => { :primitive => 'VARCHAR', :length => length                        },
+            Class            => { :primitive => 'VARCHAR', :length => length                        },
+            BigDecimal       => { :primitive => 'DECIMAL', :precision => precision, :scale => scale },
+            Float            => { :primitive => 'FLOAT',   :precision => precision                  },
+            DateTime         => { :primitive => 'TIMESTAMP'                                         },
+            Date             => { :primitive => 'DATE'                                              },
+            Time             => { :primitive => 'TIMESTAMP'                                         },
+            TrueClass        => { :primitive => 'BOOLEAN'                                           },
+            Property::Text   => { :primitive => 'TEXT'                                              },
           }.freeze
         end
       end
