@@ -9,6 +9,18 @@ module DataMapper
       def self.included(base)
         base.extend ClassMethods
       end
+      
+      def storage_exists?(storage_name)
+        statement = <<-SQL.compress_lines
+          SELECT COUNT(*)
+          FROM "information_schema"."tables"
+          WHERE "table_type" = 'BASE TABLE'
+          AND "table_schema" = ?
+          AND "table_name" = ?
+        SQL
+
+        select(statement, schema_name, storage_name).first > 0
+      end
 
       # @api semipublic
       def upgrade_model_storage(model)
